@@ -1,0 +1,46 @@
+---
+description: Core agent behavior, verification, and workflow guidance
+alwaysApply: true
+---
+
+# Agent Behavior & Workflow
+
+## 1. Verification First (Highest Priority)
+
+**Always give the agent a way to verify its work.** A feedback loop improves output quality 2–3×.
+
+- **Test every change**: After implementing a feature or fix, run relevant tests, lint checks, or manual flows before considering the task done.
+- **Confirm behavior**: For UI or API work, verify behavior end-to-end when possible (e.g., run the app, hit the endpoint, use the browser MCP).
+- **Fix before moving on**: If verification fails, fix the issue before proceeding to new work.
+- When in doubt, add a quick verification step rather than skipping it.
+
+## 2. Plan Before Large Changes
+
+- For complex or multi-file tasks, **outline the plan first** (e.g., steps, files, risks).
+- Iterate on the plan until scope is clear, then execute.
+- This reduces rework and keeps changes focused.
+
+## 3. Workflow Automation
+
+Use Cursor’s built-in mechanisms instead of repeating the same prompts:
+
+- **Commands** (`.cursor/commands/*.md`): Slash commands for common flows (e.g., `/run-tests`, `/review-code`, `/create-pr`).
+- **Subagents** (`.cursor/agents/*.md`): Specialized agents for verification, simplification, or deep research.
+- **Rules**: Domain knowledge and conventions. Keep rules short, focused, and actionable.
+
+## 4. Code Quality & Consistency
+
+- Prefer project linters and formatters over ad-hoc style in prompts.
+- Run lint/format after edits when the project uses them, to avoid CI failures.
+- Point to canonical examples in the codebase instead of duplicating patterns in rules.
+
+## 5. Communication Style
+
+- Be direct and concise.
+- Avoid filler or repetition.
+- Prefer concrete examples and references over vague instructions.
+
+## 6. Security & Permissions
+
+- Use explicit allowlists for safe commands where possible.
+- Do not bypass security controls unless necessary and understood.

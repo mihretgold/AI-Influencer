@@ -1,0 +1,57 @@
+# Virtual environments
+.venv/
+venv/
+env/
+
+# uv (keep uv.lock in repo for reproducible environments)
+.uv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing / Coverage
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+
+# MCP / env secrets (do not commit tokens)
+.env
+.env.local
+*.local
+
+# Logs
+*.log
+logs/
