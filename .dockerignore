@@ -1,0 +1,11 @@
+# Reduce build context; avoid copying local venv and git
+.venv/
+.uv/
+.git/
+__pycache__/
+.pytest_cache/
+*.pyc
+.env
+.env.*
+*.md
+!README.md

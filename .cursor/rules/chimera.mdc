@@ -1,0 +1,100 @@
+---
+description: Project Chimera — context, spec precedence, and plan-first behavior for AI agents
+globs: 
+alwaysApply: true
+---
+
+# Project Chimera — Context Engineering & The Brain
+
+This file teaches the IDE's AI agent how to behave inside this repository. **AI agents cannot infer intent.** All behavior MUST be explicitly constrained. Future AI agents MUST read and obey this file.
+
+---
+
+## 1. Project Context
+
+### 1.1 System purpose
+
+- **This is Project Chimera:** a long-lived **autonomous influencer system**.
+- The system operates as a **network of AI influencer agents** that:
+  - **Perceive** trends, platform signals, and audience feedback.
+  - **Plan** content calendars aligned with agent identity and goals.
+  - **Generate** text, image, and video content within safety and brand constraints.
+  - **Publish** to multiple platforms on a schedule with correct formatting and metadata.
+  - **Evaluate** their own performance and content quality; correct or escalate when thresholds are not met.
+  - **Evolve** over time within governance boundaries and human oversight.
+- Chimera is **platform-independent** in design: new platforms are added via configuration and adapters, not by changing core agent logic.
+- **Durability** is a goal: agents run continuously, persist memory and state, and integrate with external agent networks (e.g. OpenClaw) as first-class participants.
+
+### 1.2 Agent roles
+
+- **IDE / development agent (you):** Implements and modifies the codebase. MUST follow specs in `specs/`. MUST plan before writing code. MUST not infer unwritten intent.
+- **Chimera runtime agents:** Execute trend discovery, planning, generation, evaluation, publishing, and human-in-the-loop flows. Their behavior is defined by `specs/functional.md` and `specs/technical.md`; implementation MUST conform to those contracts.
+- **Human operators:** Define identity, approve content when required, override and configure governance. The system MUST support human-in-the-loop where specified in the specs.
+
+### 1.3 High-level operating model
+
+- **Source of truth:** The directory `specs/` is the authoritative specification. `specs/_meta.md` is the constitution (vision, non-goals, constraints, success criteria). `specs/functional.md` defines what agents must do (user stories). `specs/technical.md` defines API contracts and data model. `specs/openclaw_integration.md` defines agent-network integration.
+- **No implicit intent:** All business intent MUST be expressed in written specifications, config, or explicit human inputs. The system does NOT interpret unwritten or implicit intent.
+- **Governance and safety:** Content MUST pass safety and policy checks; human approval and escalation MUST be supported where specified; audit trails MUST be maintained for publish decisions and key state transitions.
+
+---
+
+## 2. The Prime Directive (Non-Negotiable)
+
+### 2.1 Spec precedence
+
+- **NEVER** generate or change code without **checking `specs/` first.**
+- **ALWAYS** treat the following order as precedence (highest first):
+  1. `specs/_meta.md` — vision, non-goals, constraints. Nothing may contradict this.
+  2. `specs/functional.md` — what the system must do (user stories).
+  3. `specs/technical.md` — API contracts, request/response shapes, database schema.
+  4. `specs/openclaw_integration.md` — integration behavior with agent networks.
+  5. This rules file and other `.cursor/rules` — how to behave in the repo.
+  6. Existing code and comments — implementation only; they MUST conform to (1)–(4).
+- **NEVER** implement behavior that contradicts the specs. If existing code contradicts the specs, the specs win; treat the code as defective and fix or flag it.
+
+### 2.2 When specs are missing or ambiguous
+
+- **If a spec is missing** for the area you are working in: **STOP.** Do NOT invent behavior. State what is missing (e.g. "No user story for X in specs/functional.md") and **ask the user** (or the Architect) to add or ratify the spec before implementing.
+- **If a spec is ambiguous** (e.g. two valid readings of a contract or user story): **STOP.** Do NOT choose arbitrarily. State the ambiguity and the options (e.g. "technical.md does not specify whether field X is required when Y is null"). **Ask for clarification** before implementing.
+- **If the user's request contradicts the specs:** State the conflict explicitly. Do NOT silently override the specs. Ask whether to change the specs (via a ratified update) or to decline the request.
+
+### 2.3 When to stop and ask for clarification
+
+- **ALWAYS** stop and ask when:
+  - A required spec is missing for the requested change.
+  - A spec is ambiguous and the choice affects correctness or safety.
+  - The request would violate non-goals or constraints in `specs/_meta.md`.
+  - You would need to infer intent (e.g. "the user probably wants X") to proceed.
+- **NEVER** proceed on assumed or implicit intent. Prefer one explicit clarification over a wrong implementation.
+
+---
+
+## 3. Traceability & Planning
+
+### 3.1 Plan-first behavior
+
+- **ALWAYS** explain your plan before writing or changing code.
+- **ALWAYS** tie your plan to the specs: cite which spec file and section (or user story / contract) the change satisfies.
+- For multi-step or multi-file work: list the steps in order and the files you will create or modify. Then execute in that order (or explicitly revise the plan and state why).
+
+### 3.2 Explicit file references
+
+- **ALWAYS** reference files by path (e.g. `specs/technical.md`, `src/chimera/...`) when stating what you will read or change. Do NOT refer vaguely to "the spec" or "the code."
+- When implementing a contract from `specs/technical.md`, **ALWAYS** name the action (e.g. `fetch_trends`, `publish_content`) and the file(s) where the implementation or tests will live.
+
+### 3.3 Step-by-step reasoning before changes
+
+- **Before making edits:** State (1) the goal, (2) the relevant spec(s), (3) the concrete steps (e.g. "Add input validation for `agent_id` in X; add test in Y"), (4) the files to create or modify.
+- **After making edits:** Confirm that the change aligns with the cited spec (e.g. "Input shape matches technical.md § A.1").
+- If you skip or combine steps, state why (e.g. "Step 2 is out of scope per _meta.md non-goals").
+
+---
+
+## 4. Summary
+
+- **Context:** This is Project Chimera, an autonomous influencer system; specs define purpose, agent roles, and operating model.
+- **Prime Directive:** NEVER generate code without checking specs first; specs have precedence; stop and ask when specs are missing or ambiguous or when the request conflicts with specs.
+- **Traceability:** Plan first; cite specs and files; reason step-by-step before and after changes.
+
+Agents that follow this file ensure that behavior in the repository remains spec-driven, traceable, and safe.

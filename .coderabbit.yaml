@@ -1,0 +1,13 @@
+# Project Chimera — AI review policy (Task 3.3).
+# Instructs the AI reviewer to enforce specs, contracts, security, and tests.
+
+reviews:
+  profile: assertive
+  path_instructions:
+    - path: "**"
+      instructions: |
+        This is Project Chimera, an autonomous influencer system. The source of truth is the specs/ directory.
+        1. Enforce alignment with specs/: All behavior must be derived from specs/technical.md, specs/functional.md, and specs/_meta.md. Flag any code that contradicts or bypasses these specifications.
+        2. Flag API contract violations: Code that implements or calls fetch_trends, generate_content, evaluate_content, or publish_content must conform to the request/response and error contracts in specs/technical.md and in skills/*/README.md. Report missing required fields, wrong types, or undocumented error cases.
+        3. Identify security risks: Flag hardcoded secrets, unsafe input handling, missing auth or validation, and any change that weakens governance or audit trails (see specs/_meta.md constraints).
+        4. Comment on missing tests: If new or modified code in src/ or behavior covered by specs/ does not have corresponding tests in tests/, request tests that validate the contract or behavior. Reference specs/technical.md and the failing contract tests in tests/test_trend_fetcher.py and tests/test_skills_interface.py as the expected shape.
