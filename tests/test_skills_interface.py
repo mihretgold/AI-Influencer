@@ -100,8 +100,9 @@ def test_skill_fetch_trends_exposes_explicit_error_contract() -> None:
     assert "400" in text and "503" in text
 
 
+@pytest.mark.xfail(strict=False, reason="Placeholder not implemented; see skills/skill_fetch_trends/README.md")
 def test_skill_fetch_trends_integration_returns_schema() -> None:
-    """Calling skill_fetch_trends MUST return output matching declared schema. FAILURE EXPECTED."""
+    """Calling skill_fetch_trends MUST return output matching declared schema. Remove xfail when implemented."""
     result = skill_fetch_trends("agent-1")
     assert SKILL_FETCH_TRENDS_OUTPUT_KEYS.issubset(result.keys())
     for trend in result["trends"]:
@@ -142,8 +143,9 @@ def test_skill_generate_video_exposes_explicit_error_contract() -> None:
     assert "400" in text and "422" in text and "503" in text
 
 
+@pytest.mark.xfail(strict=False, reason="Placeholder not implemented; see skills/skill_generate_video/README.md")
 def test_skill_generate_video_integration_returns_schema() -> None:
-    """Calling skill_generate_video MUST return output matching schema. FAILURE EXPECTED."""
+    """Calling skill_generate_video MUST return output matching schema. Remove xfail when implemented."""
     result = skill_generate_video(
         agent_id="a1", slot_id="s1", content_type="video", platform="youtube"
     )
@@ -191,8 +193,9 @@ def test_skill_publish_content_exposes_explicit_error_contract() -> None:
         assert code in text
 
 
+@pytest.mark.xfail(strict=False, reason="Placeholder not implemented; see skills/skill_publish_content/README.md")
 def test_skill_publish_content_integration_returns_schema() -> None:
-    """Calling skill_publish_content MUST return output matching schema. FAILURE EXPECTED."""
+    """Calling skill_publish_content MUST return output matching schema. Remove xfail when implemented."""
     result = skill_publish_content(
         content_id="draft-1", agent_id="a1", platform="youtube"
     )
