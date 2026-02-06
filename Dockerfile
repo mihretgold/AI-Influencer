@@ -13,6 +13,7 @@ WORKDIR /app
 COPY pyproject.toml uv.lock README.md ./
 COPY src ./src
 COPY tests ./tests
+COPY skills ./skills
 
 # Install project and all dependency groups (includes dev for pytest).
 # --no-editable would skip editable install; we need the package on PYTHONPATH.
